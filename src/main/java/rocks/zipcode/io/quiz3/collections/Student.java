@@ -1,16 +1,18 @@
 package rocks.zipcode.io.quiz3.collections;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * @author leon on 10/12/2018.
  */
 public class Student  {
-    public List<Lab> labArrayList;
+    private List<Lab> labArrayList;
 
 
     public Student() {
+        this(null);
         this.labArrayList = new ArrayList<>();
     }
 
@@ -24,23 +26,19 @@ public class Student  {
                 return lab;
             }
         }
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     public void setLabStatus(String labName, LabStatus labStatus) {
-        for (Lab lab: labArrayList) {
-            if(lab.labName.equals(labName)) {
-                lab.setStatus(labStatus);
-            }
-        }
+        Lab someLab = getLab(labName);
+        someLab.setStatus(labStatus);
+        //I can also use if null then throw the exception
+
     }
 
     public void forkLab(Lab lab) {
-        for (Lab labInList: labArrayList) {
-           if(labInList.equals(lab)) {
-               labInList.setStatus(LabStatus.PENDING);
-           }
-        }
+        lab.setStatus(LabStatus.PENDING);
+        labArrayList.add(lab);
     }
 
     public LabStatus getLabStatus(String labName) {
@@ -49,8 +47,16 @@ public class Student  {
                 return lab.getLabStatus();
             }
         }
-        return null;
+        throw new UnsupportedOperationException();
     }
 
+    @Override
+    public String toString() {
+        Collections.sort(labArrayList);
+        String string = "";
 
+        for (Lab lab: labArrayList) {
+            string += lab.labName + " > " + lab.labStatus + "\n";
+        } return string.trim();
+    }
 }

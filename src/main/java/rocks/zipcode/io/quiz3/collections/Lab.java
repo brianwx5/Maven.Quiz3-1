@@ -8,28 +8,25 @@ public class Lab implements Comparable<Lab>{
     LabStatus labStatus;
 
     public Lab() {
-        this("Duplicate Deleter");
+        this("duplicate deleter");
+        this.labStatus = LabStatus.INCOMPLETE;
     }
 
     public Lab(String labName) {
         this.labName = labName;
+        this.labStatus = LabStatus.INCOMPLETE;
     }
 
     public String getName() {
-        return labName;
+        return this.labName;
     }
 
     public void setStatus(LabStatus labStatus) {
         this.labStatus = labStatus;
     }
 
-
-    public String getLabName() {
-        return labName;
-    }
-
     public LabStatus getLabStatus() {
-        return labStatus;
+        return this.labStatus;
     }
 
     @Override
